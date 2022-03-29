@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 
 
+
 const start = () => {
     return inquirer
     .prompt([
@@ -29,62 +30,60 @@ const start = () => {
     ]).then((response) => {
       fs.writeFile('my-team.html', 
       `
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-          <meta charset="UTF-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>My Team</title>
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
-      </head>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>My Team</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+        </head>
       
-      <body>
+        <body>
       
-          <div class="jumbotron bg-danger text-white" style="text-align: center; border-radius: 0;">
+            <div class="jumbotron bg-danger text-white" style="text-align: center; border-radius: 0;">
       
               <h1 class="display-4">My Team</h1>
               <p class="lead"></p>
           
-          </div>
+            </div>
       
-          <div class="card-deck" style="display: flex; align-items: center; justify-content: center; margin-left: 3rem; margin-right: 3rem;">
+            <div class="card-deck" style="display: flex; align-items: center; justify-content: center; margin-left: 3rem; margin-right: 3rem;">
       
-              <div class="card shadow" style="max-width: 15rem; min-width: 13rem; margin-top: 2rem;">
+                <div class="card shadow" style="max-width: 15rem; min-width: 13rem; margin-top: 2rem;">
   
-                  <div class="card-body text-white bg-primary">
-                  <h5 class="card-title">${response.name}</h5>
-                  <h5 class="card-title">☕ Manager</h5>
-                  </div>
+                    <div class="card-body text-white bg-primary">
+                    <h5 class="card-title">${response.name}</h5>
+                    <h5 class="card-title">☕ Manager</h5>
+                    </div>
+    
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ID: ${response.yourId}</li>
+                    <li class="list-group-item">Email: <a href="mailto:${response.email}" class="card-link">${response.email}</a></li>
+                    <li class="list-group-item">Office Number: ${response.officeNumber}</li>
+                    </ul>
   
-                  <ul class="list-group list-group-flush">
-                  <li class="list-group-item">ID: ${response.yourId}</li>
-                  <li class="list-group-item">Email: <a href="mailto:${response.email}" class="card-link">${response.email}</a></li>
-                  <li class="list-group-item">Office Number: ${response.officeNumber}</li>
-                  </ul>
-  
-              </div>
-  
-          </div>
-      
-      </body>
-      </html>
-      `, (err) =>
-      err ? console.error(err) : console.log('HTML file created')
-      );
+                </div>
+
+      `, (err) => {
+        err ? console.error(err) : console.log('HTML file started. Manager card created.');
         addMember();
+      }
+      );
+        
       });
 }
 
 const addMember = () => {
     return inquirer.prompt([
         {
-            type: 'input',
-            message: 'would you like to add a team member? (y or n)',
+            type: 'confirm',
+            message: 'would you like to add a team member?',
             name: 'addMemQues',
         },
     ]).then( response1 => {
-        if (response1.addMemQues === "y"){
+        if (response1.addMemQues){
           inquirer.prompt([
               {
                 type: 'list',
@@ -99,8 +98,9 @@ const addMember = () => {
                 engineerQuestions();
               }
           })  
-        } else if (response1.addMemQues === 'n'){
+        } else if (response1.addMemQues === false){
             console.log('Great! You are all set!');
+            finishHtml();
         }else {
             console.log('Your response was invalid. Try again!')
             addMember();
@@ -132,8 +132,30 @@ const internQuestions = () => {
             name: 'school1',
         },
     ]).then( response3 => {
+        fs.appendFile('my-team.html', 
+      `
+        <div class="card shadow" style="max-width: 15rem; min-width: 13rem; margin-top: 2rem;">
+
+            <div class="card-body text-white bg-primary">
+                <h5 class="card-title">${response3.name1}</h5>
+                <h5 class="card-title">👨‍🎓 Intern</h5>
+            </div>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${response3.id1}</li>
+                <li class="list-group-item">Email: <a href="mailto:${response3.email1}" class="card-link">${response3.email1}</a></li>
+                <li class="list-group-item">School: ${response3.school1}</li>
+            </ul>
+
+        </div>
+              
+      `, (err) => {
+        err ? console.error(err) : console.log('Intern card has been created.');
+
         console.log( `Your intern ${response3.name1} has been added.`)
         addMember();
+      }
+      );
     })
     
 }
@@ -162,10 +184,68 @@ const engineerQuestions = () => {
             name: 'github2',
         },
     ]).then( response4 => {
+        fs.appendFile('my-team.html', 
+      `
+        <div class="card shadow" style="max-width: 15rem; min-width: 13rem; margin-top: 2rem;">
+
+            <div class="card-body text-white bg-primary">
+                <h5 class="card-title">${response4.name2}</h5>
+                <h5 class="card-title">👓 Engineer</h5>
+            </div>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${response4.id2}</li>
+                <li class="list-group-item">Email: <a href="#" class="card-link">${response4.email2}</a></li>
+                <li class="list-group-item">GitHub: <a href="mailto:${response4.email2}" class="card-link">${response4.github2}</a></li>
+            </ul>
+
+        </div>
+              
+      `, (err) => {
+        err ? console.error(err) : console.log('Engineer card has been created.');
+
         console.log( `Your engineer ${response4.name2} has been added.`)
         addMember();
+      }
+      );
+        
     })
     
 }
 
+const finishHtml = () => {
+    console.log('HTML file has been completed.')
+    return `
+            </div>
+
+        </body>
+        </html>
+    `
+}
+
 start();
+
+
+//notes
+
+    // ${/*
+    //             way using a general function
+    //             */
+    //            ""}
+    //         ${renderInterns(allTheInterns)}
+    //         ${// way using method on the class
+    //             ""}
+    //         ${internArray.map(intern => intern.getHtml())}
+    //         ${renderEngineers(allTheEngineers)}
+    // const writeHTML = (html) => {
+    //     fs.write
+    // }
+    // const renderInterns = (internArray) => {
+    //     return internArray.map(intern => {
+    //         return `<div class="card intern">
+    //                 ${intern.name}</div>`
+    //     })
+    // }
+    // const renderInternsWithMethod = (internArray) => {
+    //     return internArray.map(intern => intern.getHtml())
+    // }
