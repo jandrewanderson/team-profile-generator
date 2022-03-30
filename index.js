@@ -214,14 +214,16 @@ const engineerQuestions = () => {
 }
 
 const finishHtml = () => {
-    console.log('HTML file has been completed.')
-    return `
+    fs.appendFile('my-team.html', 
+    `
             </div>
 
         </body>
         </html>
-    `
-}
+    `, (err) => {
+        err ? console.error(err) : console.log('HTML file has been completed.');
+    }
+    )}
 
 start();
 
