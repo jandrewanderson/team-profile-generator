@@ -195,8 +195,8 @@ const engineerQuestions = () => {
 
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${response4.id2}</li>
-                <li class="list-group-item">Email: <a href="#" class="card-link">${response4.email2}</a></li>
-                <li class="list-group-item">GitHub: <a href="mailto:${response4.email2}" class="card-link">${response4.github2}</a></li>
+                <li class="list-group-item">Email: <a href="mailto:${response4.email2}" class="card-link">${response4.email2}</a></li>
+                <li class="list-group-item">GitHub: <a href="https://github.com/${response4.github2}" class="card-link">${response4.github2}</a></li>
             </ul>
 
         </div>
