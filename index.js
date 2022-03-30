@@ -180,7 +180,7 @@ const engineerQuestions = () => {
         },
         {
             type: 'input',
-            message: 'What is this team members GitHub link?',
+            message: 'What is this team members GitHub profile?',
             name: 'github2',
         },
     ]).then( response4 => {
