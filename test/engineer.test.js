@@ -46,8 +46,7 @@ const engineerQuestions = () => {
       `, (err) => {
         err ? console.error(err) : console.log('Engineer card has been created.');
         console.log( `Your engineer ${response4.name2} has been added.`);
-        // addMem.addMember();
-        // addMem.finishHtml();
+        addMem.addMember();
       }
       );
         

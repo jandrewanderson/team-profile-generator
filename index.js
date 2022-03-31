@@ -4,7 +4,8 @@ const fs = require('fs');
 
 
 const start = () => {
-    return inquirer
+
+  return inquirer
     .prompt([
       {
         type: 'input',

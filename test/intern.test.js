@@ -45,7 +45,7 @@ const internQuestions = () => {
               
       `, (err) => {
         err ? console.error(err) : console.log('Intern card has been created.');
-        // console.log( `Your intern ${response3.name1} has been added.`);
+        console.log( `Your intern ${response3.name1} has been added.`);
         addMem.addMember();
       }
       );

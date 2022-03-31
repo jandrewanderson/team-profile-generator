@@ -3,7 +3,7 @@ const fs = require('fs');
 const addMem = require('./employee')
 
 
-const managerQuestions = () => {
+const start = () => {
     return inquirer
     .prompt([
         {
@@ -76,5 +76,5 @@ const managerQuestions = () => {
 }
 
 module.exports = {
-    managerQuestions,
+    start,
 }
