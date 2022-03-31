@@ -50,7 +50,7 @@ https://drive.google.com/file/d/12kX4uTC_3843hMbRUimvLhM6zow854xY/view
 
 ## Link to the GitHub
 
-[Here is the link to my Github Repository]()
+[Here is the link to my Github Repository](https://github.com/jandrewanderson/team-profile-generator)
 
 ### Contributions
 
